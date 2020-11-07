@@ -5,6 +5,8 @@
 <title>Inventario</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body background="#A6A6A6">
 	<header th:replace="plantilla/template :: header"></header>
@@ -28,32 +30,32 @@
 			</thead>
 			<tbody>
 				<tr th:each="tb_persona:${Tb_persona}">
-					<th th:text="${tb_persona.cui}"
-						scope="row"></th>
+					<th th:text="${tb_persona.cui}" scope="row"></th>
 					<td th:text="${tb_persona.nombre}"></td>
 					<td th:text="${tb_persona.fecha_nacimiento}"></td>
 					<td th:text="${tb_persona.direccion}"></td>
 					<td th:text="${tb_persona.telefono_movil}"></td>
-					<td
-						th:text="${tb_persona.telefono_casa}"></td>
-					<td
-						th:text="${tb_persona.nombre_encargado}"></td>
-					<td
-						th:text="${tb_persona.cui_encargado}"></td>
-					<td><a
-						th:href="@{/tbpersona/editar/}+${tb_persona.cui}"
-						class="btn btn-primary">Editar</a> <a
-						th:onclick="eliminar3([[${tb_persona.cui}]])" class="btn btn-link">Eliminar</a>
-					</td>
+					<td th:text="${tb_persona.telefono_casa}"></td>
+					<td th:text="${tb_persona.nombre_encargado}"></td>
+					<td th:text="${tb_persona.cui_encargado}"></td>
+					<td><a class="btn btn-warning"
+						th:href="@{/mdosis/agregar/}+${tb_persona.cui}">Ingresar dosis</a></td>
 				</tr>
 			</tbody>
 		</table>
 		<div>
-		<a class="btn btn-warning" th:href="@{/edit}">Registro Dosis</a>
-		<a class="btn btn-link" th:href="@{/tbpersona/agregar}">Atras</a>
+			<a type="button" class="btn btn-success" href="/mdosis/list">Lista dosis
+			</a> <a class="btn btn-link" th:href="@{/dpersona/list}">Atras</a>
+		</div>
+		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+			th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
 		</div>
 	</div>
-	<br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<footer th:replace="plantilla/template :: footer"></footer>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

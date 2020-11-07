@@ -114,14 +114,9 @@
 
 				</div>
 			</div>
-			<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
-				th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-			</div>
 			<div class="card-footer" align="left">
 				<input type="submit" value="GUARDAR" class="btn btn-primary">
-				<a type="button" class="btn btn-warning" href="/mdosis/list">Lista
-					</a>
-				<a class="btn btn-link" th:href="@{/tbpersona/agregar}">Regresar</a>
+				<a class="btn btn-link" th:href="@{/edit}">Regresar</a>
 			</div>
 			<br>
 			<br> <br>

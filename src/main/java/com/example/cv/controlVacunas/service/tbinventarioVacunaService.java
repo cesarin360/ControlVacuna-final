@@ -18,7 +18,7 @@ public class tbinventarioVacunaService implements tbiVacuna {
 	@Override
 	public List<tb_inventario_vacunas> listar() {
 		// TODO Auto-generated method stub
-		return (List<tb_inventario_vacunas>)data.findAll();
+		return (List<tb_inventario_vacunas>) data.findAll();
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,11 @@ import com.example.cv.controlVacunas.Model.cat_laboratorios;
 import com.example.cv.controlVacunas.Model.cat_pais;
 import com.example.cv.controlVacunas.Model.cat_tipo_vacuna;
 import com.example.cv.controlVacunas.Model.tb_movimiento_dosis;
+import com.example.cv.controlVacunas.Model.tb_persona;
 import com.example.cv.controlVacunas.interfacesServices.cLab;
 import com.example.cv.controlVacunas.interfacesServices.cPais;
 import com.example.cv.controlVacunas.interfacesServices.ctVacuna;
+import com.example.cv.controlVacunas.interfacesServices.tbPersona;
 import com.example.cv.controlVacunas.interfacesServices.tbmDosis;
 
 @Controller
@@ -34,7 +37,15 @@ public class controladortbmDosis {
 
 	@Autowired
 	private cLab z;
+	@Autowired
+	private tbPersona x;
 
+	@GetMapping("/edit")
+	public String edit(Model model) {
+		List<tb_persona> cl = x.listar();
+		model.addAttribute("Tb_persona", cl);
+		return "index5";
+	}
 	@GetMapping("/mdosis/list")
 	public String listar(Model model) {
 		try {
@@ -46,11 +57,11 @@ public class controladortbmDosis {
 		}
 		
 	}
-
-	@GetMapping("/mdosis/agregar")
-	public String agregar(Model model) {
+	@GetMapping("/mdosis/agregar/{tb_persona_CUI}")
+	public String agregar(@PathVariable String tb_persona_CUI, ModelMap Map, Model model) {
 		try {
 			
+			Map.addAttribute("tb_movimiento_dosis", new tb_movimiento_dosis());
 			model.addAttribute("tb_movimiento_dosis", new tb_movimiento_dosis());
 			List<cat_pais> listpais = d.listaPaises();
 			model.addAttribute("paises", listpais);
@@ -78,7 +89,7 @@ public class controladortbmDosis {
 			c.save(cf);
 			redirectAttrs.addFlashAttribute("mensaje", "Se ha agregado correctamente.").addFlashAttribute("clase",
 					"success");
-			return "redirect:/mdosis/agregar";
+			return "redirect:/edit";
 		}
 	}
 
